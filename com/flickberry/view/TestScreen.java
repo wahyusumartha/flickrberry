@@ -7,6 +7,8 @@ import com.flickberry.flickr.FlickrContext;
 import com.flickberry.flickr.FlickrRestClient;
 import com.flickberry.flickr.FlickrRestClientException;
 import com.flickberry.flickr.FlickrSetting;
+import com.flickberry.flickr.User;
+import com.flickberry.flickr.UserImpl;
 import com.flickberry.json.JSONException;
 import com.flickberry.util.network.HttpConnectionFactory;
 
@@ -74,15 +76,21 @@ public class TestScreen extends MainScreen implements FieldChangeListener {
 		// restClient.setApiSecret(setting.apiSecret);
 		// restClient.setApiKey(setting.apiKey);
 		// Hashtable hashtable = new Hashtable();
-		// hashtable.put("auth_token", "72157625266625062-0eb27b1694f2d8c5");
-		// hashtable.put("method", "flickr.auth.checkToken");
+		// hashtable.put("user_id", "55212434@N02");
+		// hashtable.put("method", "flickr.people.getInfo");
 		// // System.out.println(restClient.getData(hashtable).toString());
-		// return restClient.getData(hashtable).getJSONObject("auth")
-		// .getJSONObject("user").getString("username");
+		// return
+		// restClient.getData(hashtable).getJSONObject("person").getJSONObject("username").getString("_content");
 	}
 
-	private void getMyInfo() {
-
+	private void getMyInfo() throws FlickrRestClientException {
+		Hashtable hashtable = new Hashtable();
+		hashtable.put("user_id", "55212434@N02");
+		hashtable.put("method", "flickr.people.getInfo");
+		UserImpl userImpl = new UserImpl(flc, hashtable);
+		Dialog.alert("Id:" + userImpl.getNsId() + "\n" + "Username : "
+				+ userImpl.getUsername() + "\n" + "Photosurl : "
+				+ userImpl.getPhotosUrl());
 	}
 
 	private void init() {
@@ -94,14 +102,19 @@ public class TestScreen extends MainScreen implements FieldChangeListener {
 	public void fieldChanged(Field field, int context) {
 		if (field == buttonField) {
 			try {
-				label.setText(getToken());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				Dialog.alert(e.getMessage());
+				getMyInfo();
 			} catch (FlickrRestClientException e) {
-				// TODO Auto-generated catch block
 				Dialog.alert(e.getMessage());
 			}
+			// try {
+			// label.setText(getToken());
+			// } catch (JSONException e) {
+			// // TODO Auto-generated catch block
+			// Dialog.alert(e.getMessage());
+			// } catch (FlickrRestClientException e) {
+			// // TODO Auto-generated catch block
+			// Dialog.alert(e.getMessage());
+			// }
 		}
 
 	}
