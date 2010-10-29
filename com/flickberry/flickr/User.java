@@ -1,5 +1,8 @@
 package com.flickberry.flickr;
 
+/*
+ * This is using to retrieve data from method flickr.people.getInfo 
+ */
 public interface User {
 
 	/*
@@ -36,6 +39,5 @@ public interface User {
 	 * Retrieve Mobile Url From User Information
 	 */
 	public String getMobileUrl();
-	
 
 }

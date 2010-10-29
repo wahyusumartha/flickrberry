@@ -19,18 +19,28 @@ public class UserImpl implements User {
 	}
 
 	public String getLocation() {
-		// TODO Auto-generated method stub
+		try {
+			return jsonObject.getJSONObject("person").getJSONObject("location")
+					.getString("_content");
+		} catch (JSONException e) {
+			log.error(e.getMessage());
+		}
 		return null;
 	}
 
 	public String getMobileUrl() {
-		// TODO Auto-generated method stub
+		try {
+			return jsonObject.getJSONObject("person")
+					.getJSONObject("mobileurl").getString("_content");
+		} catch (JSONException e) {
+			log.error(e.getMessage());
+		}
 		return null;
 	}
 
 	public String getNsId() {
 		try {
-			return jsonObject.getString("nsid");
+			return jsonObject.getJSONObject("person").getString("nsid");
 		} catch (JSONException e) {
 			log.error(e.getMessage());
 		}
@@ -38,22 +48,42 @@ public class UserImpl implements User {
 	}
 
 	public String getPhotosUrl() {
-		// TODO Auto-generated method stub
+		try {
+			return jsonObject.getJSONObject("person")
+					.getJSONObject("photosurl").getString("_content");
+		} catch (JSONException e) {
+			log.error(e.getMessage());
+		}
 		return null;
 	}
 
 	public String getProfileUrl() {
-		// TODO Auto-generated method stub
+		try {
+			return jsonObject.getJSONObject("person").getJSONObject(
+					"profileurl").getString("_content");
+		} catch (JSONException e) {
+			log.error(e.getMessage());
+		}
 		return null;
 	}
 
 	public String getRealName() {
-		// TODO Auto-generated method stub
+		try {
+			return jsonObject.getJSONObject("person").getJSONObject("realname")
+					.getString("_content");
+		} catch (JSONException e) {
+			log.error(e.getMessage());
+		}
 		return null;
 	}
 
 	public String getUsername() {
-		// TODO Auto-generated method stub
+		try {
+			return jsonObject.getJSONObject("person").getJSONObject("username")
+					.getString("_content");
+		} catch (JSONException e) {
+			log.error(e.getMessage());
+		}
 		return null;
 	}
 
